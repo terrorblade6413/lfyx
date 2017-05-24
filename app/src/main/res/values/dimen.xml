@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_header_height">44dp</dimen>
+    <dimen name="main_header_title">18sp</dimen>
+    <dimen name="main_header_right">16sp</dimen>
+
+</resources>
