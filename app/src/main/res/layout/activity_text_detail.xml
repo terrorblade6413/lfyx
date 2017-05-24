@@ -5,13 +5,14 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/dt_content"
+        android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tv_total"
         android:gravity="start"
         android:padding="@dimen/padding"
-        android:text="sdfalsdj"
+        android:text=""
+        android:hint="请输入相关内容..."
         android:background="@null"
         android:textSize="@dimen/edit_text_font" />
 

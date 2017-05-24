@@ -6,4 +6,8 @@ package com.liangfengyouxin.www.android.frame.contants;
 
 public class Constant {
     public static final String APP_ID = "";
+
+
+    public static final String REQUEST_CONTENT = "requestContent";
+    public static final int REQUEST_CODE = 1000;
 }

@@ -1,16 +1,20 @@
 package com.liangfengyouxin.www.android.normal.main;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseFragment;
+import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
 import com.liangfengyouxin.www.android.frame.bean.home.ImageBean;
+import com.liangfengyouxin.www.android.frame.contants.Constant;
 import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.OnLoadMoreListener;
 import com.liangfengyouxin.www.android.normal.main.adapter.ImageAdapter;
+import com.liangfengyouxin.www.android.normal.main.detail.ImageDetailActivity;
 import com.liangfengyouxin.www.android.presenter.GetImagePresenter;
 import com.liangfengyouxin.www.android.presenter.view.IGetImageView;
 
@@ -27,6 +31,8 @@ public class ImageFragment extends BaseFragment implements IGetImageView {
     private MSwipeRefreshLayout swipe;
     private ImageAdapter adapter;
     private GetImagePresenter presenter;
+
+    private int index;//记录选择的图片的位置
 
     @Override
     protected int setBody() {
@@ -61,6 +67,15 @@ public class ImageFragment extends BaseFragment implements IGetImageView {
             @Override
             public void loadMore() {
                 presenter.getImageMore(adapter.getData().get(adapter.getData().size() - 1).Di);
+            }
+        });
+        rView.setOnItemClickListener(new HeaderAndFooterRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                index = position;
+                Intent intent = new Intent(getContext(), ImageDetailActivity.class);
+                intent.putExtra(Constant.REQUEST_CONTENT,adapter.getData().get(position));
+                startActivityForResult(intent,Constant.REQUEST_CODE);
             }
         });
     }

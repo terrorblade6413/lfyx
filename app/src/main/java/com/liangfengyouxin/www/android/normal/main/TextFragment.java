@@ -28,10 +28,13 @@ import java.util.List;
  */
 
 public class TextFragment extends BaseFragment implements IGetTextView {
+    public static final int TEXT_REQUEST_CODE = 1001;
     private LoadMoreRecyclerView rView;
     private MSwipeRefreshLayout swipe;
     private TextAdapter adapter;
     private GetTextPresenter presenter;
+
+    private int index;//记录跳转详情页选择的item
 
     @Override
     protected int setBody() {
@@ -70,9 +73,10 @@ public class TextFragment extends BaseFragment implements IGetTextView {
         rView.setOnItemClickListener(new HeaderAndFooterRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                index = position;
                 Intent intent = new Intent(getContext(), TextDetailActivity.class);
                 intent.putExtra(TextDetailActivity.TEXT_CONTENT, adapter.getData().get(position));
-                startActivityForResult(intent, Activity.RESULT_OK);
+                startActivityForResult(intent, TEXT_REQUEST_CODE);
             }
         });
     }
@@ -94,5 +98,14 @@ public class TextFragment extends BaseFragment implements IGetTextView {
             rView.setHasLoadMore(true);
         adapter.getData().addAll(list);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == TextDetailActivity.BACK_CALL_RESULT) {
+            adapter.getData().get(index).Neirong = ((TextBean) data.getSerializableExtra(TextDetailActivity.TEXT_CONTENT)).Neirong;
+            adapter.notifyDataSetChanged();
+        }
     }
 }

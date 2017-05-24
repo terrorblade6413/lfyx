@@ -32,6 +32,9 @@
         <activity
             android:name=".normal.main.detail.TextDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.main.detail.ImageDetailActivity"
+            android:screenOrientation="portrait" />
 
 
         <!-- 微信 -->

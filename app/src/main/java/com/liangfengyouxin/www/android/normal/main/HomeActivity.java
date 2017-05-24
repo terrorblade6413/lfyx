@@ -1,5 +1,6 @@
 package com.liangfengyouxin.www.android.normal.main;
 
+import android.content.Intent;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -93,5 +94,11 @@ public class HomeActivity extends BaseActivity {
         VPagerAdapter adapter = new VPagerAdapter(getSupportFragmentManager(), fragments, titles);
         pager.setAdapter(adapter);
         pager.setCurrentItem(0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        fragments.get(pager.getCurrentItem()).onActivityResult(requestCode, resultCode, data);
     }
 }

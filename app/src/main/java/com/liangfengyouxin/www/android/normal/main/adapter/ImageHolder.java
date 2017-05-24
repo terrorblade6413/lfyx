@@ -1,5 +1,6 @@
 package com.liangfengyouxin.www.android.normal.main.adapter;
 
+import android.util.Log;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -23,5 +24,7 @@ public class ImageHolder extends BaseRecyclerHolder<ImageBean> {
     @Override
     protected void initView(int position, List<ImageBean> data) {
         picture.setImageURI(data.get(position).Lujing);
+        Log.d("picture===",picture.getWidth()+"");
+        Log.d("picture===",picture.getHeight()+"");
     }
 }

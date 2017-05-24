@@ -1,6 +1,11 @@
 package com.liangfengyouxin.www.android.normal.main.detail;
 
+import android.content.Intent;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.liangfengyouxin.www.android.R;
@@ -14,8 +19,11 @@ import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 
 public class TextDetailActivity extends BaseActivity {
     public static final String TEXT_CONTENT = "textContent";
+    public static final int BACK_CALL_RESULT = 1010;
     private TextBean bean;
     private TextView tvRight;
+    private EditText etContent;
+    private TextView total;
 
     @Override
     protected int setBody() {
@@ -28,6 +36,7 @@ public class TextDetailActivity extends BaseActivity {
         bean = (TextBean) getIntent().getSerializableExtra(TEXT_CONTENT);
         if (bean == null) {
             ToastLX.StringToast(this, "载入失败...");
+            finish();
             return;
         }
         tvRight = getTvRight();
@@ -36,7 +45,8 @@ public class TextDetailActivity extends BaseActivity {
 
     @Override
     protected void initWidget() {
-
+        etContent = (EditText) findViewById(R.id.et_content);
+        total = (TextView) findViewById(R.id.tv_total);
     }
 
     @Override
@@ -44,6 +54,26 @@ public class TextDetailActivity extends BaseActivity {
         tvRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bean.Neirong = etContent.getText().toString().trim();
+                Intent intent = new Intent();
+                intent.putExtra(TEXT_CONTENT, bean);
+                setResult(BACK_CALL_RESULT, intent);
+                finish();
+            }
+        });
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                total.setText(s.length() + "  字");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -51,6 +81,10 @@ public class TextDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        if (!TextUtils.isEmpty(bean.Neirong)) {
+            etContent.setText(bean.Neirong);
+            etContent.setSelection(bean.Neirong.length());
+            total.setText(bean.Neirong.length() + "  字");
+        }
     }
 }
