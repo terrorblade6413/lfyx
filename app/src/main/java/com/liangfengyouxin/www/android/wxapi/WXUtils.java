@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 
+import com.liangfengyouxin.www.android.frame.application.Constant;
 import com.liangfengyouxin.www.android.frame.view.DialogBase;
 import com.tencent.mm.opensdk.modelmsg.GetMessageFromWX;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -21,7 +22,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
  */
 
 public class WXUtils {
-    private static final String APP_ID = "";
 
     private static WXUtils wxUtils;
     private IWXAPI api;
@@ -35,8 +35,8 @@ public class WXUtils {
     }
 
     public IWXAPI regToWx(Context context) {
-        api = WXAPIFactory.createWXAPI(context, APP_ID, false);
-        api.registerApp(APP_ID);
+        api = WXAPIFactory.createWXAPI(context, Constant.APP_ID, false);
+        api.registerApp(Constant.APP_ID);
         return api;
     }
     SendMessageToWX.Req req;

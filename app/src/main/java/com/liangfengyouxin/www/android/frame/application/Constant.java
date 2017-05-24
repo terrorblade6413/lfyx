@@ -5,4 +5,5 @@ package com.liangfengyouxin.www.android.frame.application;
  */
 
 public class Constant {
+    public static final String APP_ID = "";
 }
