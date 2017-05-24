@@ -20,13 +20,14 @@ import rx.schedulers.Schedulers;
  */
 
 public class GetTextPresenter extends BasePresenter<IGetTextView> {
+    private boolean isLoadMore;
     public GetTextPresenter(Context context, IGetTextView iView) {
         super(context, iView);
     }
 
-    public void getTextList() {
+    private void getTextList(String id) {
 
-        ApiExecutor.getInstance().getTextList("w", "", "y")
+        ApiExecutor.getInstance().getTextList("w", id, "y")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WrapperBean<List<TextBean>>>() {
@@ -46,4 +47,17 @@ public class GetTextPresenter extends BasePresenter<IGetTextView> {
                 });
     }
 
+    public void getTextFirst() {
+        isLoadMore = false;
+        getTextList("");
+    }
+
+    public void getTextMore(String id) {
+        isLoadMore = true;
+        getTextList(id);
+    }
+
+    public boolean isLoadMore() {
+        return isLoadMore;
+    }
 }

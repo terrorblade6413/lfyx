@@ -17,12 +17,9 @@ public class LXApplication extends Application {
     public static IWXAPI api;
 
     public static Context getInstance() {
-        if (lxApplication == null)
-            synchronized (LXApplication.class) {
-                if (lxApplication == null) {
-                    lxApplication = new LXApplication();
-                }
-            }
+        if (lxApplication == null) {
+            lxApplication = new LXApplication();
+        }
         return lxApplication;
     }
 

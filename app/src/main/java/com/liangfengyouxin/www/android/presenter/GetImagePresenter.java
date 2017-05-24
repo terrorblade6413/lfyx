@@ -18,13 +18,13 @@ import rx.schedulers.Schedulers;
  */
 
 public class GetImagePresenter extends BasePresenter<IGetImageView> {
+    private boolean isLoadMore;
     public GetImagePresenter(Context context, IGetImageView iView) {
         super(context, iView);
     }
 
-    public void getImageList() {
-
-        ApiExecutor.getInstance().getImageList("t", "", "y")
+    private void getImageList(String id) {
+        ApiExecutor.getInstance().getImageList("t", id, "y")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WrapperBean<List<ImageBean>>>() {
@@ -44,4 +44,16 @@ public class GetImagePresenter extends BasePresenter<IGetImageView> {
                 });
     }
 
+    public void getImageFirst(){
+        isLoadMore = false;
+        getImageList("");
+    }
+    public void getImageMore(String id){
+        isLoadMore = true;
+        getImageList(id);
+    }
+
+    public boolean isLoadMore() {
+        return isLoadMore;
+    }
 }

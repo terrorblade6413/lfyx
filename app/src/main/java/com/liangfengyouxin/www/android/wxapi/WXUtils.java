@@ -3,12 +3,9 @@ package com.liangfengyouxin.www.android.wxapi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 
-import com.liangfengyouxin.www.android.frame.application.Constant;
+import com.liangfengyouxin.www.android.frame.contants.Constant;
 import com.liangfengyouxin.www.android.frame.view.DialogBase;
 import com.tencent.mm.opensdk.modelmsg.GetMessageFromWX;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;

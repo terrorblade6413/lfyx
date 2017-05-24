@@ -1,4 +1,4 @@
-package com.liangfengyouxin.www.android.frame.application;
+package com.liangfengyouxin.www.android.frame.contants;
 
 /**
  * Created by lin.woo on 2017/5/24.

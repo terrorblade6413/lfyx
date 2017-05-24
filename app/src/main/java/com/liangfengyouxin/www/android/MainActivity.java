@@ -18,7 +18,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int setBody() {
-        return R.layout.activity_main;
+        return -1;
     }
 
     @Override
@@ -36,6 +36,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 }

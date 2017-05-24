@@ -1,14 +1,22 @@
 package com.liangfengyouxin.www.android.normal.main;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseFragment;
+import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
 import com.liangfengyouxin.www.android.frame.bean.home.TextBean;
-import com.liangfengyouxin.www.android.normal.main.adapter.ImageAdapter;
+import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
+import com.liangfengyouxin.www.android.frame.view.recyclerview.ILoadMoreView;
+import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
+import com.liangfengyouxin.www.android.frame.view.recyclerview.OnLoadMoreListener;
 import com.liangfengyouxin.www.android.normal.main.adapter.TextAdapter;
+import com.liangfengyouxin.www.android.normal.main.detail.TextDetailActivity;
 import com.liangfengyouxin.www.android.presenter.GetTextPresenter;
 import com.liangfengyouxin.www.android.presenter.view.IGetTextView;
 
@@ -20,8 +28,8 @@ import java.util.List;
  */
 
 public class TextFragment extends BaseFragment implements IGetTextView {
-    private RecyclerView rView;
-    private SwipeRefreshLayout swipe;
+    private LoadMoreRecyclerView rView;
+    private MSwipeRefreshLayout swipe;
     private TextAdapter adapter;
     private GetTextPresenter presenter;
 
@@ -38,15 +46,11 @@ public class TextFragment extends BaseFragment implements IGetTextView {
 
     @Override
     protected void initWidget() {
-        rView = (RecyclerView) findViewById(R.id.rec_list_view);
+        rView = (LoadMoreRecyclerView) findViewById(R.id.rec_list_view);
         rView.setLayoutManager(new LinearLayoutManager(getContext()));
         rView.setAdapter(adapter);
-        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipe = (MSwipeRefreshLayout) findViewById(R.id.swipe);
         swipe.setRefreshing(true);
-        swipe.setColorSchemeResources(android.R.color.holo_red_light,
-                android.R.color.holo_blue_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light);
     }
 
     @Override
@@ -54,25 +58,40 @@ public class TextFragment extends BaseFragment implements IGetTextView {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.getTextList();
+                presenter.getTextFirst();
+            }
+        });
+        rView.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void loadMore() {
+                presenter.getTextMore(adapter.getData().get(adapter.getData().size() - 1).Di);
+            }
+        });
+        rView.setOnItemClickListener(new HeaderAndFooterRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                Intent intent = new Intent(getContext(), TextDetailActivity.class);
+                intent.putExtra(TextDetailActivity.TEXT_CONTENT, adapter.getData().get(position));
+                startActivityForResult(intent, Activity.RESULT_OK);
             }
         });
     }
 
     @Override
     protected void initData() {
-        presenter.getTextList();
+        presenter.getTextFirst();
     }
 
     @Override
     public void getTextListSuccess(List<TextBean> list) {
-        swipe.post(new Runnable() {
-            @Override
-            public void run() {
-                swipe.setRefreshing(false);
-            }
-        });
-        adapter.getData().clear();
+        swipe.completeRefresh();
+        if (!presenter.isLoadMore())
+            adapter.getData().clear();
+
+        if (list.size() < 10)
+            rView.setHasLoadMore(false);
+        else
+            rView.setHasLoadMore(true);
         adapter.getData().addAll(list);
         adapter.notifyDataSetChanged();
     }
