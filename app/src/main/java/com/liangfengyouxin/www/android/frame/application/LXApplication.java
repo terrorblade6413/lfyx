@@ -12,20 +12,17 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
  */
 
 public class LXApplication extends Application {
-
-    private static LXApplication lxApplication;
     public static IWXAPI api;
+    private static Context context;
 
     public static Context getInstance() {
-        if (lxApplication == null) {
-            lxApplication = new LXApplication();
-        }
-        return lxApplication;
+        return context;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
         initFresco();
         initWX();
     }

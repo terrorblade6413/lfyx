@@ -33,7 +33,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int setBody() {
-        return R.layout.activity_main;
+        return R.layout.activity_home;
     }
 
     @Override

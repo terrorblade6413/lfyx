@@ -3,8 +3,6 @@ package com.liangfengyouxin.www.android.frame.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.liangfengyouxin.www.android.frame.application.LXApplication;
-
 /**
  * Created by lin.woo on 2017/5/24.
  */

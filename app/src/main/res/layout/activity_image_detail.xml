@@ -4,9 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_reminiscence"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:background="#00ff00" />
+
+            <ImageView
+                android:id="@+id/img_blur"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:background="#00ff00" />
+
+            <ImageView
+                android:id="@+id/img_emboss"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:background="#00ff00" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:background="#00ff00" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/fresco_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/scroll_bottom"
         fresco:actualImageScaleType="fitCenter" />
 </RelativeLayout>
