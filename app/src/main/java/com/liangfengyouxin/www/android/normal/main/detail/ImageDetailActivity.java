@@ -18,6 +18,7 @@ import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.BurlImage;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.EmbossImage;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.ReminiscenceImage;
+import com.liangfengyouxin.www.android.frame.utils.imageprocess.view.IProcessImage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +28,7 @@ import java.io.FileNotFoundException;
  * Created by lin.woo on 2017/5/24.
  */
 
-public class ImageDetailActivity extends BaseActivity {
+public class ImageDetailActivity extends BaseActivity implements IProcessImage{
     private SimpleDraweeView picture;
     private ImageView imgReminiscence;
     private ImageView imgBurl;
@@ -38,6 +39,8 @@ public class ImageDetailActivity extends BaseActivity {
     private Bitmap bitReminiscence;
     private Bitmap bitBurl;
     private Bitmap bitEmboss;
+
+    private ReminiscenceImage oldRemeber;
 
     @Override
     protected int setBody() {
@@ -53,6 +56,8 @@ public class ImageDetailActivity extends BaseActivity {
             finish();
             return;
         }
+        oldRemeber = new ReminiscenceImage(this);
+
     }
 
     @Override
@@ -70,12 +75,13 @@ public class ImageDetailActivity extends BaseActivity {
             public void onClick(View v) {
 //                picture.setImageBitmap(ReminiscenceImage.oldRemeber(getLoacalBitmap(file.getAbsolutePath())));
                 Bitmap bitmap = getLoacalBitmap(file.getAbsolutePath());
+                oldRemeber.execute(bitmap);
 //                bitReminiscence = ReminiscenceImage.oldRemeber(bitmap);
 //                imgReminiscence.setImageBitmap(bitReminiscence);
-                bitBurl = BurlImage.blurImageAmeliorate(bitmap);
-                imgBurl.setImageBitmap(bitBurl);
-                bitEmboss = EmbossImage.emboss(bitmap);
-                imgEmboss.setImageBitmap(bitEmboss);
+//                bitBurl = BurlImage.blurImageAmeliorate(bitmap);
+//                imgBurl.setImageBitmap(bitBurl);
+//                bitEmboss = EmbossImage.emboss(bitmap);
+//                imgEmboss.setImageBitmap(bitEmboss);
             }
         });
         imgBurl.setOnClickListener(new View.OnClickListener() {
@@ -121,5 +127,10 @@ public class ImageDetailActivity extends BaseActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void onBitmap(Bitmap bitmap) {
+        imgReminiscence.setImageBitmap(bitmap);
     }
 }

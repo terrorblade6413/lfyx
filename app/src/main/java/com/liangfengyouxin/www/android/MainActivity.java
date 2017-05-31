@@ -61,9 +61,9 @@ public class MainActivity extends BaseActivity {
 //            public void run() {
 //                try {
 //                    Thread.sleep(2000);
-//                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }

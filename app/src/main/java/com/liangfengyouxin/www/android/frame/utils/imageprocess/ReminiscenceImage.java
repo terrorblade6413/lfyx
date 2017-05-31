@@ -5,22 +5,18 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.liangfengyouxin.www.android.frame.utils.imageprocess.view.IProcessImage;
+
 /**
  * Created by lin.woo on 2017/5/25.
  */
 
-public class ReminiscenceImage {
-    /**
-     * 怀旧效果(相对之前做了优化快一倍)
-     *
-     * @param bmp
-     * @return
-     */
-    public Bitmap oldRemeber(Bitmap bmp) {
-        new ImageProcess().execute(bmp);
-        return /*bitmap*/null;
+public class ReminiscenceImage extends ImageProcessBase<IProcessImage>{
+
+    public ReminiscenceImage(IProcessImage iView) {
+        super(iView);
     }
-    private Bitmap operation(Bitmap bmp){
+    protected Bitmap operation(Bitmap bmp){
         // 速度测试
         long start = System.currentTimeMillis();
         int width = bmp.getWidth();
@@ -55,20 +51,9 @@ public class ReminiscenceImage {
         return bitmap;
     }
 
-    class ImageProcess extends AsyncTask<Bitmap,Void,Bitmap> {
-        public ImageProcess(){
-
-        }
-
-        @Override
-        protected Bitmap doInBackground(Bitmap... params) {
-            return operation(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-
-        }
+    @Override
+    protected void output(Bitmap bitmap) {
+        iView.onBitmap(bitmap);
     }
+
 }
