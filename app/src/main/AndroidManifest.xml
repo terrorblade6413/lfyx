@@ -35,6 +35,21 @@
         <activity
             android:name=".normal.main.detail.ImageDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.more.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.more.MoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.award.AwardSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.award.AwardDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.award.AwardListActivity"
+            android:screenOrientation="portrait" />
 
 
         <!-- 微信 -->

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.normal.main.HomeActivity;
+import com.liangfengyouxin.www.android.normal.more.MoreActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -61,7 +62,8 @@ public class MainActivity extends BaseActivity {
 //            public void run() {
 //                try {
 //                    Thread.sleep(2000);
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MoreActivity.class);
                     startActivity(intent);
                     finish();
 //                } catch (InterruptedException e) {

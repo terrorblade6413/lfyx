@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liangfengyouxin.www.android.R;
@@ -21,7 +22,7 @@ public class TextDetailActivity extends BaseActivity {
     public static final String TEXT_CONTENT = "textContent";
     public static final int BACK_CALL_RESULT = 1010;
     private TextBean bean;
-    private TextView tvRight;
+    private LinearLayout llRight;
     private EditText etContent;
     private TextView total;
 
@@ -39,7 +40,9 @@ public class TextDetailActivity extends BaseActivity {
             finish();
             return;
         }
-        tvRight = getTvRight();
+        llRight = getLlRight();
+        TextView tvRight = (TextView) llRight.getChildAt(0);
+        tvRight.setVisibility(View.VISIBLE);
         tvRight.setText("保存");
     }
 
@@ -51,7 +54,7 @@ public class TextDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        tvRight.setOnClickListener(new View.OnClickListener() {
+        llRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bean.Neirong = etContent.getText().toString().trim();

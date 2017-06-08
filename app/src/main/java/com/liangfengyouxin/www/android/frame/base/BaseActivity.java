@@ -25,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private LayoutInflater inflater;
     private ImageView imgBack;
     private TextView tvTitle;
-    private TextView tvRight;
+    private LinearLayout llRight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             View header = inflater.inflate(setHeader(), null);
             imgBack = (ImageView) header.findViewById(R.id.base_activity_img_back);
             tvTitle = (TextView) header.findViewById(R.id.base_activity_tv_title);
-            tvRight = (TextView) header.findViewById(R.id.base_activity_tv_right);
+            llRight = (LinearLayout) header.findViewById(R.id.base_activity_ll_right);
             close();
             llHeader.addView(header);
         }
@@ -99,7 +99,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return imgBack;
     }
 
-    public TextView getTvRight() {
-        return tvRight;
+    public LinearLayout getLlRight() {
+        return llRight;
     }
 }
