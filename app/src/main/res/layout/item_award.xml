@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_line"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding">
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/pic_sdv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:placeholderImage="@color/colorAccent"
+        fresco:placeholderImageScaleType="fitCenter" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/padding">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2017.6.1"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:text="中奖率"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_lottery_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:text="抽奖次数 200/1000"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_winning_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:text="中奖次数"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
 </LinearLayout>

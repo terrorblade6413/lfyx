@@ -42,7 +42,7 @@
             android:name=".normal.more.MoreActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".normal.award.AwardSettingActivity"
+            android:name=".normal.award.AwardCreateActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".normal.award.AwardDetailActivity"

@@ -5,11 +5,11 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="main_title">@color/white</color>
+    <color name="main_text">#333333</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="text">@color/black</color>
     <color name="split_line">#E4E4E4</color>
 
     <color name="header_bg_color">@color/white</color>
