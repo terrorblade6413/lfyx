@@ -11,16 +11,6 @@
     </style>
 
 
-    <style name="TranslucentTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-        <item name="windowNoTitle">true</item>
-        <item name="android:background">#00000000</item>
-    </style>
-
-
 
 
 

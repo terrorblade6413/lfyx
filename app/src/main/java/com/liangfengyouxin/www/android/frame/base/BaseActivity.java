@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,29 +41,37 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        initValue();
-        initWidget();
-        initListener();
-        initData();
+        initValue(savedInstanceState);
+        initWidget(savedInstanceState);
+        initListener(savedInstanceState);
+        initData(savedInstanceState);
     }
 
     protected int setHeader() {
         return R.layout.base_header_activity;
     }
 
-    protected abstract int setBody();
+    protected int setBody(){
+        return -1;
+    }
 
-    protected abstract void initValue();
+    protected void initValue(@Nullable Bundle savedInstanceState){
 
-    protected abstract void initWidget();
+    }
 
-    protected abstract void initListener();
+    protected void initWidget(@Nullable Bundle savedInstanceState){
 
-    protected abstract void initData();
+    }
+
+    protected void initListener(@Nullable Bundle savedInstanceState){
+
+    }
+
+    protected  void initData(@Nullable Bundle savedInstanceState){}
 
     //设置界面结构
     private final void setView() {
-        if (setHeader() == -1) {
+        if (setHeader() == -1 || setBody() == 0) {
             llHeader.setVisibility(View.GONE);
         } else {
             View header = inflater.inflate(setHeader(), null);
@@ -72,10 +81,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             close();
             llHeader.addView(header);
         }
-        if (setBody() == -1) {
+        if (setBody() == -1 || setBody() == 0) {
             llBody.setVisibility(View.GONE);
         } else {
-            llBody.addView(inflater.inflate(setBody(), null));
+            llBody.addView(inflater.inflate(setBody(), llBody,false));
         }
     }
 
@@ -94,12 +103,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-
+    //获取头部的左边布局
     public ImageView getLeftView() {
         return imgBack;
     }
-
+    //获取头部右边布局
     public LinearLayout getLlRight() {
         return llRight;
+    }
+    //获取当前根布局
+    public LinearLayout getBodyLayout(){
+        return llBody;
     }
 }

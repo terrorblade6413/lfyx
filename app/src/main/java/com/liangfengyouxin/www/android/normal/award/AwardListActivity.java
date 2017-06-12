@@ -1,6 +1,9 @@
 package com.liangfengyouxin.www.android.normal.award;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
+import com.liangfengyouxin.www.android.frame.bean.award.AwardListBean;
 import com.liangfengyouxin.www.android.frame.contants.Constant;
 import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
@@ -32,7 +36,8 @@ public class AwardListActivity extends BaseActivity {
     }
 
     @Override
-    protected void initValue() {
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
         setTitle("抽奖二维码");
         llRight = getLlRight();
         TextView tvRight = (TextView) llRight.getChildAt(0);
@@ -43,13 +48,17 @@ public class AwardListActivity extends BaseActivity {
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         swipe = (MSwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         recyclerView = (LoadMoreRecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener(@Nullable Bundle savedInstanceState) {
+        super.initListener(savedInstanceState);
         llRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +76,9 @@ public class AwardListActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
-
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
+        adapter.getData().add(new AwardListBean());
+        adapter.notifyDataSetChanged();
     }
 }

@@ -2,6 +2,8 @@ package com.liangfengyouxin.www.android.normal.main.detail;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -17,6 +19,7 @@ import com.liangfengyouxin.www.android.frame.contants.Constant;
 import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.BurlImage;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.EmbossImage;
+import com.liangfengyouxin.www.android.frame.utils.imageprocess.ImageProcessBase;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.ReminiscenceImage;
 import com.liangfengyouxin.www.android.frame.utils.imageprocess.view.IProcessImage;
 
@@ -28,7 +31,7 @@ import java.io.FileNotFoundException;
  * Created by lin.woo on 2017/5/24.
  */
 
-public class ImageDetailActivity extends BaseActivity implements IProcessImage{
+public class ImageDetailActivity extends BaseActivity implements IProcessImage {
     private SimpleDraweeView picture;
     private ImageView imgReminiscence;
     private ImageView imgBurl;
@@ -48,7 +51,8 @@ public class ImageDetailActivity extends BaseActivity implements IProcessImage{
     }
 
     @Override
-    protected void initValue() {
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
         setTitle("图片详情页");
         bean = (ImageBean) getIntent().getSerializableExtra(Constant.REQUEST_CONTENT);
         if (bean == null) {
@@ -56,12 +60,13 @@ public class ImageDetailActivity extends BaseActivity implements IProcessImage{
             finish();
             return;
         }
-        oldRemeber = new ReminiscenceImage(this);
+        oldRemeber = new ReminiscenceImage(this, ImageProcessBase.IMAGE_PROCESS_REMINISCENCE);
 
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         picture = (SimpleDraweeView) findViewById(R.id.fresco_image);
         imgReminiscence = (ImageView) findViewById(R.id.img_reminiscence);
         imgBurl = (ImageView) findViewById(R.id.img_blur);
@@ -69,7 +74,8 @@ public class ImageDetailActivity extends BaseActivity implements IProcessImage{
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener(@Nullable Bundle savedInstanceState) {
+        super.initListener(savedInstanceState);
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +111,8 @@ public class ImageDetailActivity extends BaseActivity implements IProcessImage{
     }
 
     @Override
-    protected void initData() {
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
         picture.setImageURI(bean.Lujing);
 
 //        GenericDraweeHierarchy hierarchy = picture.getHierarchy();
@@ -130,7 +137,13 @@ public class ImageDetailActivity extends BaseActivity implements IProcessImage{
     }
 
     @Override
-    public void onBitmap(Bitmap bitmap) {
-        imgReminiscence.setImageBitmap(bitmap);
+    public void onBitmap(Bitmap bitmap, int type) {
+        switch (type){
+            case ImageProcessBase.IMAGE_PROCESS_REMINISCENCE:
+                bitReminiscence = bitmap;
+                imgReminiscence.setImageBitmap(bitmap);
+                break;
+        }
+
     }
 }

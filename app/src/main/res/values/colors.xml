@@ -6,6 +6,7 @@
 
     <color name="main_title">@color/white</color>
     <color name="main_text">#333333</color>
+    <color name="main_hint_text">#999999</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

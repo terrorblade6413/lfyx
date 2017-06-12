@@ -11,12 +11,13 @@ import com.liangfengyouxin.www.android.frame.utils.imageprocess.view.IProcessIma
  * Created by lin.woo on 2017/5/25.
  */
 
-public class ReminiscenceImage extends ImageProcessBase<IProcessImage>{
+public class ReminiscenceImage extends ImageProcessBase<IProcessImage> {
 
-    public ReminiscenceImage(IProcessImage iView) {
-        super(iView);
+    public ReminiscenceImage(IProcessImage iView, int type) {
+        super(iView, type);
     }
-    protected Bitmap operation(Bitmap bmp){
+
+    protected Bitmap operation(Bitmap bmp) {
         // 速度测试
         long start = System.currentTimeMillis();
         int width = bmp.getWidth();
@@ -52,8 +53,8 @@ public class ReminiscenceImage extends ImageProcessBase<IProcessImage>{
     }
 
     @Override
-    protected void output(Bitmap bitmap) {
-        iView.onBitmap(bitmap);
+    protected void output(Bitmap bitmap, int type) {
+        iView.onBitmap(bitmap, type);
     }
 
 }

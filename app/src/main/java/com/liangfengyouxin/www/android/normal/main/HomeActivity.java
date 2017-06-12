@@ -1,15 +1,19 @@
 package com.liangfengyouxin.www.android.normal.main;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.frame.base.BaseFragment;
 import com.liangfengyouxin.www.android.frame.view.VPagerAdapter;
+import com.liangfengyouxin.www.android.normal.more.MoreActivity;
 import com.liangfengyouxin.www.android.wxapi.WXUtils;
 
 import java.util.ArrayList;
@@ -26,10 +30,10 @@ public class HomeActivity extends BaseActivity {
     private LinearLayout llText;
     private LinearLayout llImage;
 
-    @Override
-    protected int setHeader() {
-        return -1;
-    }
+//    @Override
+//    protected int setHeader() {
+//        return -1;
+//    }
 
     @Override
     protected int setBody() {
@@ -37,11 +41,25 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void initValue() {
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
+        LinearLayout llRight = getLlRight();
+        TextView tvRight = (TextView) llRight.getChildAt(0);
+        tvRight.setVisibility(View.VISIBLE);
+        tvRight.setText("更多");
+        llRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MoreActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         pager = (ViewPager) findViewById(R.id.view_pager);
         pagerTab = (PagerTabStrip) findViewById(R.id.page_tag);
 
@@ -58,7 +76,8 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener(@Nullable Bundle savedInstanceState) {
+        super.initListener(savedInstanceState);
         llText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +95,8 @@ public class HomeActivity extends BaseActivity {
     List<BaseFragment> fragments;
 
     @Override
-    protected void initData() {
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
 
         List<String> titles = new ArrayList<>();
         titles.add("文字");
