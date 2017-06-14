@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_gift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_line"
+        android:hint="请输入礼品"
+        android:padding="@dimen/padding"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_14" />
+    <EditText
+        android:id="@+id/et_gift_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_line"
+        android:hint="请输入礼品数量"
+        android:padding="@dimen/padding"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_14" />
+    <EditText
+        android:id="@+id/et_gift_remaining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_line"
+        android:hint="请输入礼品剩余数量"
+        android:padding="@dimen/padding"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_14" />
+</LinearLayout>

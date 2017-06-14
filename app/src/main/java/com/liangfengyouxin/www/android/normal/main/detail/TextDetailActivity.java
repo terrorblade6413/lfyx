@@ -1,6 +1,8 @@
 package com.liangfengyouxin.www.android.normal.main.detail;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,7 +34,8 @@ public class TextDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void initValue() {
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
         setTitle("文本编辑");
         bean = (TextBean) getIntent().getSerializableExtra(TEXT_CONTENT);
         if (bean == null) {
@@ -47,13 +50,15 @@ public class TextDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         etContent = (EditText) findViewById(R.id.et_content);
         total = (TextView) findViewById(R.id.tv_total);
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener(@Nullable Bundle savedInstanceState) {
+        super.initListener(savedInstanceState);
         llRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +88,8 @@ public class TextDetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
         if (!TextUtils.isEmpty(bean.Neirong)) {
             etContent.setText(bean.Neirong);
             etContent.setSelection(bean.Neirong.length());

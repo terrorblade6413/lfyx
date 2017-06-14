@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.liangfengyouxin.www.android.R;
+import com.liangfengyouxin.www.android.frame.application.LXApplication;
 import com.liangfengyouxin.www.android.frame.base.BaseFragment;
 import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
 import com.liangfengyouxin.www.android.frame.bean.home.TextBean;
+import com.liangfengyouxin.www.android.frame.utils.UMSharedUtil;
 import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.ILoadMoreView;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
@@ -19,6 +21,7 @@ import com.liangfengyouxin.www.android.normal.main.adapter.TextAdapter;
 import com.liangfengyouxin.www.android.normal.main.detail.TextDetailActivity;
 import com.liangfengyouxin.www.android.presenter.GetTextPresenter;
 import com.liangfengyouxin.www.android.presenter.view.IGetTextView;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class TextFragment extends BaseFragment implements IGetTextView {
     private TextAdapter adapter;
     private GetTextPresenter presenter;
 
+    private UMSharedUtil share;
     private int index;//记录跳转详情页选择的item
 
     @Override
@@ -79,11 +83,24 @@ public class TextFragment extends BaseFragment implements IGetTextView {
                 startActivityForResult(intent, TEXT_REQUEST_CODE);
             }
         });
+
+        rView.setOnItemLongClickListener(new HeaderAndFooterRecyclerViewAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongCLick(RecyclerView.ViewHolder holder, int position) {
+                if (position == 0)
+                    share.setContent(adapter.getData().get(position).Neirong).shareWXCircle();
+                else
+                    share.setContent(adapter.getData().get(position).Neirong).shareSina();
+
+                return false;
+            }
+        });
     }
 
     @Override
     protected void initData() {
         presenter.getTextFirst();
+        share = UMSharedUtil.getInstance().setContext(getActivity());
     }
 
     @Override
@@ -107,5 +124,6 @@ public class TextFragment extends BaseFragment implements IGetTextView {
             adapter.getData().get(index).Neirong = ((TextBean) data.getSerializableExtra(TextDetailActivity.TEXT_CONTENT)).Neirong;
             adapter.notifyDataSetChanged();
         }
+        UMShareAPI.get(LXApplication.getInstance()).onActivityResult(requestCode, resultCode, data);
     }
 }

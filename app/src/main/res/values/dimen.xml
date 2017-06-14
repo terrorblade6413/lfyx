@@ -10,4 +10,6 @@
     <dimen name="text_18">18sp</dimen>
 
     <dimen name="padding">12dp</dimen>
+
+    <dimen name="split_line_height">0.5dp</dimen>
 </resources>

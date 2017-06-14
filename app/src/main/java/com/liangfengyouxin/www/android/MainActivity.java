@@ -3,6 +3,7 @@ package com.liangfengyouxin.www.android;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -46,21 +47,19 @@ public class MainActivity extends BaseActivity implements IRegisterView{
     }
 
     @Override
-    protected void initValue() {
-
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         textView = (TextView) findViewById(R.id.tv);
     }
 
     @Override
-    protected void initListener() {
-    }
-
-    @Override
-    protected void initData() {
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {

@@ -6,6 +6,8 @@ import android.content.Context;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.liangfengyouxin.www.android.wxapi.WXUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 /**
  * Created by lin.woo on 2017/5/15.
@@ -33,6 +35,7 @@ public class LXApplication extends Application {
     }
 
     private void initWX() {
-        api = WXUtils.getInstance().regToWx(this);
+        UMShareAPI.get(this);
+//        api = WXUtils.getInstance().regToWx(this);
     }
 }

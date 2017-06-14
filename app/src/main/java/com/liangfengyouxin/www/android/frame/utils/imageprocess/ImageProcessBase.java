@@ -10,9 +10,12 @@ import com.liangfengyouxin.www.android.frame.utils.imageprocess.view.IProcessIma
  */
 
 public abstract class ImageProcessBase<T> {
+    public static final int IMAGE_PROCESS_REMINISCENCE = 1;
     public T iView;
-    public ImageProcessBase(T iView){
+    public int type;
+    public ImageProcessBase(T iView, int type){
         this.iView = iView;
+        this.type = type;
     }
     public void execute(Bitmap bmp){
         new ImageProcess().execute(bmp);
@@ -32,9 +35,9 @@ public abstract class ImageProcessBase<T> {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            output(bitmap);
+            output(bitmap, type);
         }
     }
 
-    protected abstract void output(Bitmap bitmap);
+    protected abstract void output(Bitmap bitmap , int type);
 }

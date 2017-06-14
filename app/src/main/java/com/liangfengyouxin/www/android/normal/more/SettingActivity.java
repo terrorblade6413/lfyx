@@ -13,23 +13,4 @@ public class SettingActivity extends BaseActivity {
         return R.layout.activity_setting;
     }
 
-    @Override
-    protected void initValue() {
-
-    }
-
-    @Override
-    protected void initWidget() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
 }

@@ -8,5 +8,5 @@ import android.graphics.Bitmap;
  */
 
 public interface IProcessImage {
-    void onBitmap(Bitmap bitmap);
+    void onBitmap(Bitmap bitmap,int type);
 }

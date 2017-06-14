@@ -1,6 +1,8 @@
 package com.liangfengyouxin.www.android.normal.more;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,20 +25,22 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void initValue() {
-
+    protected void initValue(@Nullable Bundle savedInstanceState) {
+        super.initValue(savedInstanceState);
         llRight = getLlRight();
         llRight.getChildAt(0).setVisibility(View.VISIBLE);
 
     }
 
     @Override
-    protected void initWidget() {
+    protected void initWidget(@Nullable Bundle savedInstanceState) {
+        super.initWidget(savedInstanceState);
         rlAward = (RelativeLayout) findViewById(R.id.rl_award);
     }
 
     @Override
-    protected void initListener() {
+    protected void initListener(@Nullable Bundle savedInstanceState) {
+        super.initListener(savedInstanceState);
         rlAward.setOnClickListener(this);
 
         llRight.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +53,8 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void initData() {
-
+    protected void initData(@Nullable Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
     }
 
     @Override
