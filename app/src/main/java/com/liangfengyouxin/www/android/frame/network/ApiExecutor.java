@@ -27,6 +27,11 @@ public class ApiExecutor {
     public static final ApiService getInstance() {
         return SingletonHolder.INSTANCE;
     }
+    public static final ApiService getInstance2() {
+        return create2();
+    }
+
+
 
 
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
@@ -39,6 +44,16 @@ public class ApiExecutor {
     public static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.Url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(httpClient)
+                .build();
+        return retrofit.create(ApiService.class);
+    }
+
+    public static ApiService create2() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiService.Url2)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(httpClient)

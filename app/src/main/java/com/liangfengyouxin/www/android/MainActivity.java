@@ -23,13 +23,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
+import com.liangfengyouxin.www.android.frame.bean.home.ImageBean;
 import com.liangfengyouxin.www.android.normal.main.HomeActivity;
 import com.liangfengyouxin.www.android.normal.more.MoreActivity;
+import com.liangfengyouxin.www.android.presenter.user.RegisterPresenter;
+import com.liangfengyouxin.www.android.presenter.user.view.IRegisterView;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IRegisterView{
     TextView textView;
     @Override
     protected int setHeader() {
@@ -63,14 +67,20 @@ public class MainActivity extends BaseActivity {
 //                try {
 //                    Thread.sleep(2000);
 //                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    Intent intent = new Intent(MainActivity.this, MoreActivity.class);
-                    startActivity(intent);
-                    finish();
+//                    Intent intent = new Intent(MainActivity.this, MoreActivity.class);
+//                    startActivity(intent);
+//                    finish();
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
 //            }
 //        }).start();
+        RegisterPresenter presenter = new RegisterPresenter(this,this);
+        presenter.register();
+    }
+
+    @Override
+    public void registerSuccess(List<ImageBean> list) {
 
     }
 }

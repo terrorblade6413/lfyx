@@ -6,6 +6,7 @@ package com.liangfengyouxin.www.android.frame.contants;
 
 public class Constant {
     public static final String APP_ID = "";
+    public static final String SECRET_KEY = "lx1234567890";
 
 
     public static final String REQUEST_CONTENT = "requestContent";
