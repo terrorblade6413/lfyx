@@ -22,19 +22,20 @@ import rx.Observable;
 
 public interface ApiService {
     String Url = "http://ec2-52-78-19-242.ap-northeast-2.compute.amazonaws.com/";
-    String Url2 = "http://120.132.26.162:82/";
+    String Url2 = "http://120.132.26.162:82";
 
     //获取图片type t
     @GET("request_wtys_ios.php")
     Observable<WrapperBean<List<ImageBean>>> getImageList(@Query("leixing") String type, @Query("lastdi") String id, @Query("dizeng") String order);
+
     //获取文字type w
     @GET("request_wtys_ios.php")
     Observable<WrapperBean<List<TextBean>>> getTextList(@Query("leixing") String type, @Query("lastdi") String id, @Query("dizeng") String order);
 
-    @POST("adduser")
+    @POST("/")
     @FormUrlEncoded
-    Observable<WrapperBean2<RegisterBean>> register(@Field("api_dev") String serviceId, @Field("shouji")String phone,
-                                                    @Field("password")String password, @Field("user_type")int type, @Field("api_sign") String url);
+    Observable<WrapperBean2<RegisterBean>> register(@Field("api_type") String apiType, @Field("api_method") String apiMethod, @Field("api_dev") String serviceId, @Field("shouji") String phone,
+                                                    @Field("password") String password, @Field("user_type") int type, @Field("api_sign") String url);
 
 //    //创建账号
 //    @FormUrlEncoded

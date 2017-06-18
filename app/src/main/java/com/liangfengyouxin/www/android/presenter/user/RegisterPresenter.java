@@ -1,6 +1,7 @@
 package com.liangfengyouxin.www.android.presenter.user;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean2;
@@ -24,13 +25,15 @@ import rx.schedulers.Schedulers;
 
 public class RegisterPresenter extends BasePresenter<IRegisterView> {
     private boolean isLoadMore;
+
     public RegisterPresenter(Context context, IRegisterView iView) {
         super(context, iView);
     }
 
     public void register() {
         String url = MD5.hexdigest("Useradduser");
-        ApiExecutor.getInstance2().register("test","15882306413","123456",1,url)
+        Log.d("========", url);
+        ApiExecutor.getInstance2().register("User", "adduser", "test", "15882306413", "123456", 1, url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WrapperBean2<RegisterBean>>() {
