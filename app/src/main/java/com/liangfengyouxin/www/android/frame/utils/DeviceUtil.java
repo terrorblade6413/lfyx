@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.liangfengyouxin.www.android.frame.application.LXApplication;
+import com.ta.utdid2.device.UTUtdid;
 
 /**
  * Created by wulin on 2017/5/25.
