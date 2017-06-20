@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.liangfengyouxin.www.android.frame.application.LXApplication;
@@ -14,13 +15,15 @@ import com.liangfengyouxin.www.android.frame.application.LXApplication;
  * Created by wulin on 2017/5/25.
  */
 public class DeviceUtil {
-
+    private static final String DEVICE_ALI_UTDID = "deviceAllUtdid";
     private static int sDensityDpi;
     private static float sDensity;
     private static float sScreenHeight;
     private static float sScreenWidth;
     private static float sScreenWidthDpi;
     private static float sScreenHeightDpi;
+
+    private static String mAliUtdid = "";
 
     /**
      * dp---> px
@@ -128,6 +131,26 @@ public class DeviceUtil {
      */
     public static String getSdkVersion() {
         return android.os.Build.VERSION.RELEASE;
+    }
+
+    /**
+     * @param @return
+     * @return String
+     * @Description 采用阿里方式生成的设备唯一标识
+     * @author lin.woo
+     */
+    public static String getDeviceUtdid() {
+        if (TextUtils.isEmpty(mAliUtdid)) {
+            String utdid = PreferencesUtils.getString(LXApplication.getInstance(), DEVICE_ALI_UTDID, "");
+            if (TextUtils.isEmpty(utdid)) {
+                utdid = UTUtdid.instance(LXApplication.getInstance()).getValue();
+                if (!TextUtils.isEmpty(utdid)) {
+                    PreferencesUtils.putString(LXApplication.getInstance(), DEVICE_ALI_UTDID, utdid);
+                }
+            }
+            mAliUtdid = utdid;
+        }
+        return mAliUtdid;
     }
 
 //    public static int getNetWorkType() {
