@@ -53,6 +53,9 @@
         <activity
             android:name=".normal.award.AddAwardActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".normal.more.joinActivity.JoinActivityListActivity"
+            android:screenOrientation="portrait" />
 
 
         <!-- 微信 -->

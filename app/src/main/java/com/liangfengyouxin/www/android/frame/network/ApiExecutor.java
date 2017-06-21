@@ -31,9 +31,6 @@ public class ApiExecutor {
         return create2();
     }
 
-
-
-
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient httpClient = new OkHttpClient.Builder()

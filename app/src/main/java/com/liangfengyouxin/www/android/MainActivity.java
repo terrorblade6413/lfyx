@@ -65,17 +65,17 @@ public class MainActivity extends BaseActivity implements IRegisterView{
 //            public void run() {
 //                try {
 //                    Thread.sleep(2000);
-//                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
 //                    Intent intent = new Intent(MainActivity.this, MoreActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                    startActivity(intent);
+                    finish();
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
 //            }
 //        }).start();
-        RegisterPresenter presenter = new RegisterPresenter(this,this);
-        presenter.register();
+//        RegisterPresenter presenter = new RegisterPresenter(this,this);
+//        presenter.registerPersonage("","");
     }
 
     @Override

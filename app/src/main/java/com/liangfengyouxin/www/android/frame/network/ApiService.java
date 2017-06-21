@@ -1,14 +1,18 @@
 package com.liangfengyouxin.www.android.frame.network;
 
+import com.liangfengyouxin.www.android.frame.bean.BaseBean;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean2;
 import com.liangfengyouxin.www.android.frame.bean.home.ImageBean;
 import com.liangfengyouxin.www.android.frame.bean.home.TextBean;
+import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActBean;
 import com.liangfengyouxin.www.android.frame.bean.user.RegisterBean;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -32,15 +36,18 @@ public interface ApiService {
     @GET("request_wtys_ios.php")
     Observable<WrapperBean<List<TextBean>>> getTextList(@Query("leixing") String type, @Query("lastdi") String id, @Query("dizeng") String order);
 
+    //注册
     @POST("/")
     @FormUrlEncoded
-    Observable<WrapperBean2<RegisterBean>> register(@Field("api_type") String apiType, @Field("api_method") String apiMethod, @Field("api_dev") String serviceId, @Field("shouji") String phone,
-                                                    @Field("password") String password, @Field("user_type") int type, @Field("api_sign") String url);
+    Observable<WrapperBean2<RegisterBean>> register(@FieldMap Map<String, Object> param);
 
-//    //创建账号
-//    @FormUrlEncoded
-//    @POST("api/rest")
-//    Observable<WrapperEntity> getRandomUser(@Field("args") String args);
-
+    //获取我参与的抽奖活动列表
+    @POST("/")
+    @FormUrlEncoded
+    Observable<WrapperBean2<List<JoinActBean>>> joinActList(@FieldMap Map<String, Object> param);
+    //获取我参与的抽奖活动详情
+    @POST("/")
+    @FormUrlEncoded
+    Observable<WrapperBean2<JoinActBean>> joinActDetail(@FieldMap Map<String, Object> param);
 
 }

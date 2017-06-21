@@ -33,11 +33,11 @@ import java.util.Set;
  */
 public class PreferencesUtils {
     /**
-     * ÎÄ¼şÃû
+     * æ–‡ä»¶å
      */
     public static String PREFERENCE_NAME = "HX_BUSINESS_APP";
     /**
-     * °¢Àï·½Ê½Éú³ÉµÄÎ¨Ò»Éè±¸±êÊ¶
+     * é˜¿é‡Œæ–¹å¼ç”Ÿæˆçš„å”¯ä¸€è®¾å¤‡æ ‡è¯†
      */
     public static String DEVICE_ALI_UTDID = "ALI_UTDID";
     ;
