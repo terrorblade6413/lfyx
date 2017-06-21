@@ -5,7 +5,6 @@ import android.content.Context;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean2;
 import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActBean;
 import com.liangfengyouxin.www.android.frame.network.ApiExecutor;
-import com.liangfengyouxin.www.android.frame.utils.DeviceUtil;
 import com.liangfengyouxin.www.android.presenter.BasePresenter;
 import com.liangfengyouxin.www.android.presenter.joinActivity.view.IJoinActivityList;
 
@@ -39,8 +38,7 @@ public class JoinActivityListPresenter extends BasePresenter<IJoinActivityList> 
 
     private void joinActList() {
 
-        param.put("api_dev", DeviceUtil.getDeviceUtdid());
-        param.put("uid", "19");
+        put("uid", "19");
 
         ApiExecutor.getInstance2().joinActList(param)
                 .subscribeOn(Schedulers.io())

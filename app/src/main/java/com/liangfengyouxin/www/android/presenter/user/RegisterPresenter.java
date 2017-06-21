@@ -39,19 +39,18 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
 
 
     public void registerPersonage(String phone, String pw) {
-        param.put("user_type", USER_TYPE_PERSONAGE);
+        put("user_type", USER_TYPE_PERSONAGE);
         register(phone, pw);
     }
 
     public void registerCompany(String phone, String pw) {
-        param.put("user_type", USER_TYPE_COMPANY);
+        put("user_type", USER_TYPE_COMPANY);
         register(phone, pw);
     }
 
     private void register(String phone, String pw) {
-        param.put("api_dev", DeviceUtil.getDeviceUtdid());
-        param.put("shouji", phone);
-        param.put("password", pw);
+        put("shouji", phone);
+        put("password", pw);
 
         ApiExecutor.getInstance2().register(param)
                 .subscribeOn(Schedulers.io())

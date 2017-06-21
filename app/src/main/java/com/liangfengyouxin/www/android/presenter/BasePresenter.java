@@ -2,6 +2,7 @@ package com.liangfengyouxin.www.android.presenter;
 
 import android.content.Context;
 
+import com.liangfengyouxin.www.android.frame.utils.DeviceUtil;
 import com.liangfengyouxin.www.android.frame.utils.md5.MD5;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class BasePresenter<T> {
     public BasePresenter(Context context, T iView) {
         this.mContext = context;
         this.iView = iView;
+        setDefault();
     }
 
     protected HashMap<String, Object> put(String key, Object value) {
@@ -32,5 +34,12 @@ public class BasePresenter<T> {
         put("api_sign", MD5.hexdigest(type+method));
         put("api_type", type);
         put("api_method", method);
+    }
+
+    /**
+     * 设置默认参数
+     */
+    protected void setDefault(){
+        put("api_dev", DeviceUtil.getDeviceUtdid());
     }
 }

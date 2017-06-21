@@ -5,10 +5,8 @@ import android.content.Context;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean2;
 import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActBean;
 import com.liangfengyouxin.www.android.frame.network.ApiExecutor;
-import com.liangfengyouxin.www.android.frame.utils.DeviceUtil;
 import com.liangfengyouxin.www.android.presenter.BasePresenter;
 import com.liangfengyouxin.www.android.presenter.joinActivity.view.IJoinActDetail;
-import com.liangfengyouxin.www.android.presenter.joinActivity.view.IJoinActivityList;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -22,14 +20,12 @@ import rx.schedulers.Schedulers;
 public class JoinActDetailPresenter extends BasePresenter<IJoinActDetail> {
     public JoinActDetailPresenter(Context context, IJoinActDetail iView) {
         super(context, iView);
-        setSign("Gamble", "mygamble");
+        setSign("Gamble", "gambledetail");
     }
 
     public void joinActDetail(String id) {
 
-        param.put("api_dev", DeviceUtil.getDeviceUtdid());
-        param.put("uid", "19");
-        param.put("id",id);
+        put("id",id);
 
         ApiExecutor.getInstance2().joinActDetail(param)
                 .subscribeOn(Schedulers.io())
