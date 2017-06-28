@@ -16,6 +16,7 @@ import com.umeng.socialize.UMShareAPI;
 public class LXApplication extends Application {
     public static IWXAPI api;
     private static Context context;
+    public static String uid = "19";
 
     public static Context getInstance() {
         return context;

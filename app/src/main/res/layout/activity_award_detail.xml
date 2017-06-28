@@ -11,14 +11,4 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item_award_info"></com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView>
 
-    <TextView
-        android:id="@+id/tv_add"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="添加奖品"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_16" />
 </RelativeLayout>

@@ -11,12 +11,15 @@ import com.liangfengyouxin.www.android.R;
  */
 
 public class DialogBase extends Dialog {
-//    public DialogBase(@NonNull Context context, @StyleRes int themeResId) {
-//        super(context, themeResId);
-//    }
+    protected Context mContext;
     public DialogBase(@NonNull Context context) {
         super(context);
+        mContext = context;
         setContentView(R.layout.dialog_base);
     }
-
+    public DialogBase(Context context,int layout){
+        super(context);
+        mContext = context;
+        setContentView(layout);
+    }
 }

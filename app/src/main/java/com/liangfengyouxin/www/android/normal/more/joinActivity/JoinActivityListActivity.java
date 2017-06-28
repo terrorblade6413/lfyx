@@ -9,6 +9,9 @@ import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
 import com.liangfengyouxin.www.android.frame.bean.award.AwardListBean;
+import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActBean;
+import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActItemBean;
+import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
 import com.liangfengyouxin.www.android.normal.more.joinActivity.adapter.JoinActAdapter;
@@ -17,18 +20,19 @@ import com.liangfengyouxin.www.android.presenter.joinActivity.JoinActivityListPr
 import com.liangfengyouxin.www.android.presenter.joinActivity.view.IJoinActDetail;
 import com.liangfengyouxin.www.android.presenter.joinActivity.view.IJoinActivityList;
 
+import java.util.List;
+
 /**
  * Created by lin.woo on 2017/6/21.
  */
 
-public class JoinActivityListActivity extends BaseActivity implements IJoinActivityList, IJoinActDetail {
+public class JoinActivityListActivity extends BaseActivity implements IJoinActivityList {
 
     private MSwipeRefreshLayout swipe;
     private LoadMoreRecyclerView recyclerView;
 
     private JoinActAdapter adapter;
     private JoinActivityListPresenter presenter;
-    private JoinActDetailPresenter detailPresenter;
 
     @Override
     protected int setBody() {
@@ -40,7 +44,6 @@ public class JoinActivityListActivity extends BaseActivity implements IJoinActiv
         super.initValue(savedInstanceState);
         adapter = new JoinActAdapter(this, null);
         presenter = new JoinActivityListPresenter(this, this);
-        detailPresenter = new JoinActDetailPresenter(this, this);
     }
 
     @Override
@@ -60,7 +63,6 @@ public class JoinActivityListActivity extends BaseActivity implements IJoinActiv
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 //                Intent intent = new Intent(JoinActivityListActivity.this, AwardDetailActivity.class);
 //                startActivityForResult(intent, Constant.REQUEST_CODE);
-                detailPresenter.joinActDetail("54");
             }
         });
     }
@@ -68,28 +70,27 @@ public class JoinActivityListActivity extends BaseActivity implements IJoinActiv
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         super.initData(savedInstanceState);
-        adapter.getData().add(new AwardListBean());
-        adapter.notifyDataSetChanged();
         presenter.getFirst();
     }
 
     @Override
-    public void getJoinActListSuccess() {
-
+    public void getJoinActListSuccess(List<JoinActItemBean> list,boolean isMore) {
+        if(presenter.page == 1){
+            adapter.getData().clear();
+            ToastLX.StringToast(this,"没有更多数据了");
+            return;
+        }
+        if(!isMore){
+            ToastLX.StringToast(this,"没有更多数据了");
+            return;
+        }
+        adapter.getData().addAll(list);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getJoinActListFailure(boolean isRequest, int code, String msg) {
-
+            ToastLX.StringToast(this,"请求失败");
     }
 
-    @Override
-    public void getJoinActSuccess() {
-
-    }
-
-    @Override
-    public void getJoinActFailure(boolean isRequest, int code, String msg) {
-
-    }
 }

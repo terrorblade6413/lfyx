@@ -1,13 +1,16 @@
 package com.liangfengyouxin.www.android.frame.network;
 
 import com.liangfengyouxin.www.android.frame.bean.BaseBean;
+import com.liangfengyouxin.www.android.frame.bean.ListWrapperBean;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean2;
+import com.liangfengyouxin.www.android.frame.bean.award.AwardListBean;
 import com.liangfengyouxin.www.android.frame.bean.home.ImageBean;
 import com.liangfengyouxin.www.android.frame.bean.home.TextBean;
 import com.liangfengyouxin.www.android.frame.bean.joinActivity.JoinActBean;
 import com.liangfengyouxin.www.android.frame.bean.user.RegisterBean;
 
+import java.sql.Wrapper;
 import java.util.List;
 import java.util.Map;
 
@@ -44,10 +47,26 @@ public interface ApiService {
     //获取我参与的抽奖活动列表
     @POST("/")
     @FormUrlEncoded
-    Observable<WrapperBean2<List<JoinActBean>>> joinActList(@FieldMap Map<String, Object> param);
+    Observable<WrapperBean2<JoinActBean>> joinActList(@FieldMap Map<String, Object> param);
+
     //获取我参与的抽奖活动详情
     @POST("/")
     @FormUrlEncoded
     Observable<WrapperBean2<JoinActBean>> joinActDetail(@FieldMap Map<String, Object> param);
+
+    //抽奖列表
+    @POST("/")
+    @FormUrlEncoded
+    Observable<WrapperBean2<ListWrapperBean<AwardListBean>>> awardList(@FieldMap Map<String, Object> param);
+
+    //新增或修改抽奖
+    @POST("/")
+    @FormUrlEncoded
+    Observable<WrapperBean2> addOrModifyAward(@FieldMap Map<String, Object> param);
+
+    //获取抽奖详情
+    @POST("/")
+    @FormUrlEncoded
+    Observable<WrapperBean2<AwardListBean>> awardDetail(@FieldMap Map<String, Object> param);
 
 }

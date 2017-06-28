@@ -5,6 +5,7 @@ import android.content.Context;
 import com.liangfengyouxin.www.android.frame.bean.WrapperBean;
 import com.liangfengyouxin.www.android.frame.bean.home.ImageBean;
 import com.liangfengyouxin.www.android.frame.network.ApiExecutor;
+import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 import com.liangfengyouxin.www.android.presenter.view.IGetImageView;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class GetImagePresenter extends BasePresenter<IGetImageView> {
                 .subscribe(new Subscriber<WrapperBean<List<ImageBean>>>() {
                     @Override
                     public void onCompleted() {
+                        ToastLX.StringToast(mContext,".....");
                     }
 
                     @Override

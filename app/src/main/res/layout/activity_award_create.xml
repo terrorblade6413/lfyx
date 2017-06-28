@@ -1,146 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <ImageView
-        android:id="@+id/tv_qr_code"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp" />
-
-    <View
+    <TextView
+        android:id="@+id/tv_add"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/split_line" />
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="添加奖品"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_14" />
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@id/tv_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_line"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="创建时间: " />
-
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:background="@color/white"
-            android:textColor="@color/main_text"
-            android:textSize="@dimen/text_14"
-            android:visibility="gone" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_line"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+            <ImageView
+                android:id="@+id/tv_qr_code"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="中奖率: " />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/split_line" />
 
-        <EditText
-            android:id="@+id/et_rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:background="@color/white"
-            android:gravity="right"
-            android:hint="例如:10/100"
-            android:digits="0123456789/"
-            android:maxLength="17"
-            android:singleLine="true"
-            android:textColor="@color/main_text"
-            android:textColorHint="@color/main_hint_text"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:padding="@dimen/padding">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_line"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="是否需要抽奖码" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="限制抽奖次数: " />
+                <Switch
+                    android:id="@+id/switch_draw_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
 
-        <EditText
-            android:id="@+id/et_max_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:background="@color/white"
-            android:gravity="right"
-            android:inputType="number"
-            android:maxLength="8"
-            android:textColor="@color/main_text"
-            android:textColorHint="@color/main_hint_text"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:padding="@dimen/padding">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_line"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="创建时间: " />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="中奖次数: " />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:textColor="@color/main_text"
+                    android:textSize="@dimen/text_14"
+                    android:visibility="gone" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/et_win_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding"
-            android:background="@color/white"
-            android:gravity="right"
-            android:maxLength="8"
-            android:inputType="number"
-            android:textColor="@color/main_text"
-            android:textColorHint="@color/main_hint_text"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_line"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中奖率: " />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="奖品列表: 100" />
+                <EditText
+                    android:id="@+id/et_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:hint="例如:100(表示1/100)"
+                    android:inputType="number"
+                    android:maxLength="17"
+                    android:singleLine="true"
+                    android:textColor="@color/main_text"
+                    android:textColorHint="@color/main_hint_text"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
 
-        <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="@dimen/padding"-->
-        <!--android:background="@color/white"-->
-        <!--android:gravity="right"-->
-        <!--android:textColor="@color/main_text"-->
-        <!--android:textColorHint="@color/main_hint_text"-->
-        <!--android:textSize="@dimen/text_14" />-->
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="限制抽奖次数: " />
+
+                <EditText
+                    android:id="@+id/et_max_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:hint="不限制输入 0"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:textColor="@color/main_text"
+                    android:textColorHint="@color/main_hint_text"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中奖次数: " />
+
+                <EditText
+                    android:id="@+id/et_win_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:textColor="@color/main_text"
+                    android:textColorHint="@color/main_hint_text"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开始抽奖时间:" />
+
+                <EditText
+                    android:id="@+id/et_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:hint="例如: 2017-06-01 00:00:00"
+                    android:textColor="@color/main_hint_text"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_line"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="结束抽奖时间:" />
+
+                <EditText
+                    android:id="@+id/et_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:background="@color/white"
+                    android:gravity="right"
+                    android:hint="例如: 2017-06-01 00:00:00"
+                    android:textColor="@color/main_hint_text"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding"
+                android:text="奖品列表: " />
+
+            <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/padding"-->
+            <!--android:background="@color/white"-->
+            <!--android:gravity="right"-->
+            <!--android:textColor="@color/main_text"-->
+            <!--android:textColorHint="@color/main_hint_text"-->
+            <!--android:textSize="@dimen/text_14" />-->
+            <com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

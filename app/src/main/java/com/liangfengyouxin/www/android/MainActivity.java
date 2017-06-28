@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements IRegisterView{
 //                try {
 //                    Thread.sleep(2000);
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                    Intent intent = new Intent(MainActivity.this, MoreActivity.class);
+//                    Intent intent = new Intent(LuckActivity.this, MoreActivity.class);
                     startActivity(intent);
                     finish();
 //                } catch (InterruptedException e) {

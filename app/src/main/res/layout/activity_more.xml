@@ -266,4 +266,43 @@
         android:layout_height="@dimen/split_line_height"
         android:layout_marginTop="@dimen/padding"
         android:background="@color/split_line" />
+    <RelativeLayout
+        android:id="@+id/rl_begin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding">
+
+        <ImageView
+            android:id="@+id/img_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_begin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/img_begin_right"
+            android:layout_toRightOf="@id/img_begin"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
+            android:text="开始抽奖" />
+
+        <ImageView
+            android:id="@+id/img_begin_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ic_launcher" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:layout_marginTop="@dimen/padding"
+        android:background="@color/split_line" />
 </LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_line"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/padding">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/padding"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="11"
+        android:maxLength="10"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/padding"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_14" />
+</LinearLayout>

@@ -17,18 +17,23 @@ import com.liangfengyouxin.www.android.frame.contants.Constant;
 import com.liangfengyouxin.www.android.frame.view.MSwipeRefreshLayout;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
 import com.liangfengyouxin.www.android.normal.award.adapter.AwardAdapter;
+import com.liangfengyouxin.www.android.presenter.award.AwardListPresenter;
+import com.liangfengyouxin.www.android.presenter.award.view.IAwardList;
+
+import java.util.List;
 
 /**
  * Created by lin.woo on 2017/6/6.
  */
 
-public class AwardListActivity extends BaseActivity {
+public class AwardListActivity extends BaseActivity implements IAwardList {
 
     private LinearLayout llRight;
     private MSwipeRefreshLayout swipe;
     private LoadMoreRecyclerView recyclerView;
 
     private AwardAdapter adapter;
+    private AwardListPresenter presenter;
 
     @Override
     protected int setBody() {
@@ -45,6 +50,7 @@ public class AwardListActivity extends BaseActivity {
         tvRight.setText("创建");
 
         adapter = new AwardAdapter(this, null);
+        presenter = new AwardListPresenter(this, this);
     }
 
     @Override
@@ -70,6 +76,7 @@ public class AwardListActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
                 Intent intent = new Intent(AwardListActivity.this, AwardDetailActivity.class);
+                intent.putExtra(AwardDetailActivity.AWARD_DETAIL_DATA,adapter.getData().get(position));
                 startActivityForResult(intent, Constant.REQUEST_CODE);
             }
         });
@@ -78,7 +85,17 @@ public class AwardListActivity extends BaseActivity {
     @Override
     protected void initData(@Nullable Bundle savedInstanceState) {
         super.initData(savedInstanceState);
-        adapter.getData().add(new AwardListBean());
+        presenter.getFirst();
+    }
+
+    @Override
+    public void getAwardListSuccess(List<AwardListBean> list) {
+        adapter.getData().addAll(list);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getAwardListFailure(boolean isRequest, int code, String msg) {
+
     }
 }

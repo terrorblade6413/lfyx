@@ -7,21 +7,20 @@ import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseRecyclerAdapter;
 import com.liangfengyouxin.www.android.frame.base.BaseRecyclerHolder;
 import com.liangfengyouxin.www.android.frame.bean.award.AddAwardBean;
-import com.liangfengyouxin.www.android.frame.bean.award.AwardListBean;
 
 import java.util.List;
 
 /**
- * Created by lin.woo on 2017/6/6.
+ * Created by lin.woo on 2017/6/24.
  */
 
-public class AwardInfoAdapter extends BaseRecyclerAdapter<AddAwardBean> {
-    public AwardInfoAdapter(Context context, List<AddAwardBean> data) {
+public class AddAwardAdapter extends BaseRecyclerAdapter<AddAwardBean> {
+    public AddAwardAdapter(Context context, List<AddAwardBean> data) {
         super(context, data);
     }
 
     @Override
     public BaseRecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AwardInfoHolder(inflater.inflate(R.layout.item_award_info, parent, false));
+        return new AddAwardHolder(mContext,inflater.inflate(R.layout.item_add_award,parent,false));
     }
 }

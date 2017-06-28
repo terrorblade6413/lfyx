@@ -5,19 +5,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.frame.base.HeaderAndFooterRecyclerViewAdapter;
 import com.liangfengyouxin.www.android.frame.bean.award.AwardListBean;
 import com.liangfengyouxin.www.android.frame.contants.Constant;
+import com.liangfengyouxin.www.android.frame.utils.DateUtils;
 import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 import com.liangfengyouxin.www.android.frame.view.recyclerview.LoadMoreRecyclerView;
 import com.liangfengyouxin.www.android.normal.award.adapter.AwardInfoAdapter;
+import com.liangfengyouxin.www.android.presenter.award.AwardDetailPresenter;
+import com.liangfengyouxin.www.android.presenter.award.view.IAwardDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +33,22 @@ import java.util.List;
  * Created by lin.woo on 2017/6/6.
  */
 
-public class AwardDetailActivity extends BaseActivity {
+public class AwardDetailActivity extends BaseActivity implements IAwardDetail{
+    public static final String AWARD_DETAIL_DATA = "awardDetailData";
     private AwardInfoAdapter adapter;
     private LoadMoreRecyclerView recyclerView;
-    private TextView tvAdd;
+    private LinearLayout llRight;
+
+    //头部信息---抽奖基本信息
+    private TextView tvTime;
+    private TextView tvRate;
+    private TextView tvLotteryNumber;
+    private TextView tvWinningNumber;
+    private SimpleDraweeView logo;
+    //------------------------------
+
+    private AwardListBean bean;
+    private AwardDetailPresenter presenter;
 
     @Override
     protected int setBody() {
@@ -39,8 +58,15 @@ public class AwardDetailActivity extends BaseActivity {
     @Override
     protected void initValue(@Nullable Bundle savedInstanceState) {
         super.initValue(savedInstanceState);
+        llRight = getLlRight();
+        TextView edit = (TextView) llRight.getChildAt(0);
+        edit.setText("编辑");
+        edit.setVisibility(View.VISIBLE);
+
 
         adapter = new AwardInfoAdapter(this, null);
+        bean = (AwardListBean) getIntent().getSerializableExtra(AWARD_DETAIL_DATA);
+        presenter = new AwardDetailPresenter(this,this);
     }
 
     @Override
@@ -50,7 +76,6 @@ public class AwardDetailActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        tvAdd = (TextView) findViewById(R.id.tv_add);
     }
 
     @Override
@@ -65,11 +90,14 @@ public class AwardDetailActivity extends BaseActivity {
             }
         });
 
-        tvAdd.setOnClickListener(new View.OnClickListener() {
+
+        llRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AwardDetailActivity.this, AddAwardActivity.class);
-                startActivityForResult(intent, Constant.REQUEST_CODE);
+                Intent intent = new Intent(AwardDetailActivity.this,AwardCreateActivity.class);
+                intent.putExtra(AWARD_DETAIL_DATA,bean);
+                startActivityForResult(intent,Constant.REQUEST_CODE);
+
             }
         });
     }
@@ -78,43 +106,36 @@ public class AwardDetailActivity extends BaseActivity {
     protected void initData(@Nullable Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         initHeader();
-
-        List<AwardListBean> list = new ArrayList<>();
-        AwardListBean bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        bean = new AwardListBean();
-        list.add(bean);
-        adapter.getData().addAll(list);
-        adapter.notifyDataSetChanged();
-
+        presenter.getDetail(bean.id);
     }
 
     private void initHeader() {
         View view = LayoutInflater.from(this).inflate(R.layout.item_award, getBodyLayout(),false);
+        tvTime = (TextView) view.findViewById(R.id.tv_date);
+        tvRate = (TextView) view.findViewById(R.id.tv_rate);
+        tvLotteryNumber = (TextView) view.findViewById(R.id.tv_lottery_number);
+        logo = (SimpleDraweeView) view.findViewById(R.id.pic_sdv);
+        tvWinningNumber = (TextView) view.findViewById(R.id.tv_winning_number);
+
+        tvTime.setText(DateUtils.unixTimesToDate(Long.valueOf(bean.addtime) * 1000, DateUtils.DATE_SMALL_STR));
+        //未使用
+        int unused = Integer.valueOf(TextUtils.isEmpty(bean.prize_overplus) ? bean.gamblecode_num : bean.prize_overplus);
+        //总数
+        int total = Integer.valueOf(TextUtils.isEmpty(bean.gamblecode_num) ? "0" : bean.gamblecode_num);
+        tvLotteryNumber.setText(unused + "/" + bean.gamblecode_num);
+        logo.setImageURI(bean.url);
+        tvRate.setText("中奖率: 1/" + bean.win_percent);
+
+        tvWinningNumber.setText("中奖次数: " + (total - unused));
+
+
+
+
+
+
+
+
+
         recyclerView.addHeaderView(view);
     }
 
@@ -124,5 +145,16 @@ public class AwardDetailActivity extends BaseActivity {
         if(resultCode == AddAwardActivity.RESULT_CODE_ADD_AWARD){
 
         }
+    }
+
+    @Override
+    public void AwardDetailSuccess(AwardListBean bean) {
+        adapter.getData().addAll(bean.prize_list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void AwardDetailFailure(boolean isRequest, int code, String msg) {
+
     }
 }

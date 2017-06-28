@@ -1,16 +1,27 @@
 package com.liangfengyouxin.www.android.frame.network;
 
 import android.util.Log;
+import android.util.TimeUtils;
+
+import com.liangfengyouxin.www.android.frame.application.LXApplication;
+import com.liangfengyouxin.www.android.frame.utils.ToastLX;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.URLDecoder;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.regex.Matcher;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Timeout;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,6 +45,9 @@ public class ApiExecutor {
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient httpClient = new OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.SECONDS)
+            .writeTimeout(1, TimeUnit.SECONDS)
+            .readTimeout(1,TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(new ParamsInterceptor())
             .build();
@@ -41,9 +55,9 @@ public class ApiExecutor {
     public static ApiService create() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.Url)
+                .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(httpClient)
                 .build();
         return retrofit.create(ApiService.class);
     }
@@ -69,15 +83,22 @@ public class ApiExecutor {
                     .host(oldRequest.url().host());
 
             Request newRequest = oldRequest.newBuilder()
-//                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .header("token","http://ec2-52-78-19-242.ap-northeast-2.compute.amazonaws.com/request_qiniu_token.php")
                     .method(oldRequest.method(), oldRequest.body())
                     .url(authorizedUrlBuilder.build())
                     .build();
-            Log.d("log---", URLDecoder.decode(oldRequest.toString(),"UTF-8"));
-            return chain.proceed(newRequest);
+            Response response = null;
+            try {
+                response = chain.proceed(newRequest);
+            }catch (SocketTimeoutException e){
+                Log.d("=========","请求超时....");
+
+                return response;
+            }
+            return response;
         }
     }
+
 
 }
 

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.liangfengyouxin.www.android.R;
 import com.liangfengyouxin.www.android.frame.base.BaseActivity;
 import com.liangfengyouxin.www.android.normal.award.AwardListActivity;
+import com.liangfengyouxin.www.android.normal.award.luck.LuckActivity;
 import com.liangfengyouxin.www.android.normal.more.joinActivity.JoinActivityListActivity;
 
 /**
@@ -20,6 +21,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout llRight;
     private RelativeLayout rlAward;
     private RelativeLayout rlJoinAct;
+    private RelativeLayout reBegin;
 
     @Override
     protected int setBody() {
@@ -39,6 +41,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
         super.initWidget(savedInstanceState);
         rlAward = (RelativeLayout) findViewById(R.id.rl_award);
         rlJoinAct = (RelativeLayout) findViewById(R.id.rl_join_act);
+        reBegin = (RelativeLayout) findViewById(R.id.rl_begin);
     }
 
     @Override
@@ -46,6 +49,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
         super.initListener(savedInstanceState);
         rlAward.setOnClickListener(this);
         rlJoinAct.setOnClickListener(this);
+        reBegin.setOnClickListener(this);
 
         llRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +75,10 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rl_join_act:
                 Intent joinAct = new Intent(this, JoinActivityListActivity.class);
                 startActivity(joinAct);
+                break;
+            case R.id.rl_begin:
+                Intent begin = new Intent(this,LuckActivity.class);
+                startActivity(begin);
                 break;
         }
     }
